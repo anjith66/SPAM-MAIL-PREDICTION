@@ -1,4 +1,4 @@
-
+```python
 import pickle
 import streamlit as st
 import base64
@@ -19,10 +19,6 @@ st.set_page_config(
 # File paths
 # --------------------------------------------------
 
-
-
-
-
 BACKGROUND_PATH = "SPAM MAIL BACKGROUND.png"
 
 
@@ -30,14 +26,18 @@ BACKGROUND_PATH = "SPAM MAIL BACKGROUND.png"
 # Load model
 # --------------------------------------------------
 
-load_model=pickle.load(open("spam_mail_prediction.sav","rb"))
+load_model = pickle.load(
+    open("spam_mail_prediction.sav", "rb")
+)
 
 
 # --------------------------------------------------
 # Load TF-IDF vectorizer
 # --------------------------------------------------
 
-feature_extraction=pickle.load(open("features_extraction.sav","rb"))
+feature_extraction = pickle.load(
+    open("features_extraction.sav", "rb")
+)
 
 
 # --------------------------------------------------
@@ -45,7 +45,9 @@ feature_extraction=pickle.load(open("features_extraction.sav","rb"))
 # --------------------------------------------------
 
 with open(BACKGROUND_PATH, "rb") as file:
-    encoded_image = base64.b64encode(file.read()).decode()
+    encoded_image = base64.b64encode(
+        file.read()
+    ).decode()
 
 
 # --------------------------------------------------
@@ -56,6 +58,7 @@ st.markdown(
     f"""
     <style>
 
+    /* Background */
     .stApp {{
         background-image: url(
             "data:image/png;base64,{encoded_image}"
@@ -67,13 +70,53 @@ st.markdown(
         background-attachment: fixed;
     }}
 
+
+    /* Main white container */
     .block-container {{
         background-color: rgba(255, 255, 255, 0.94);
         padding: 40px;
         border-radius: 20px;
         max-width: 850px;
         margin-top: 40px;
-        box-shadow: 0px 8px 30px rgba(0,0,0,0.25);
+
+        box-shadow:
+            0px 8px 30px rgba(0, 0, 0, 0.25);
+    }}
+
+
+    /* Main title */
+    .main-title {{
+        color: black !important;
+        text-align: center;
+        font-size: 40px;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }}
+
+
+    /* Description */
+    .description {{
+        color: black !important;
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 25px;
+    }}
+
+
+    /* Text area label */
+    label {{
+        color: black !important;
+        font-weight: 600 !important;
+    }}
+
+
+    /* Predict button */
+    .stButton > button {{
+        width: 100%;
+        height: 50px;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: bold;
     }}
 
     </style>
@@ -92,7 +135,9 @@ def spam_mail_pred(input_mail):
         [input_mail]
     )
 
-    prediction = load_model.predict(input_features)
+    prediction = load_model.predict(
+        input_features
+    )
 
     if prediction[0] == 0:
 
@@ -117,13 +162,30 @@ def spam_mail_pred(input_mail):
 
 def main():
 
-    st.title("📧 SPAM MAIL PREDICTION")
-
-    st.write(
-        "Enter an email message below to check whether "
-        "it is Spam or Ham."
+    # Black title
+    st.markdown(
+        """
+        <div class="main-title">
+            📧 SPAM MAIL PREDICTION
+        </div>
+        """,
+        unsafe_allow_html=True
     )
 
+
+    # Description
+    st.markdown(
+        """
+        <div class="description">
+            Enter an email message below to check whether
+            it is Spam or Ham.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+    # Email input
     input_mail = st.text_area(
         "📩 Enter Email Content",
         height=250,
@@ -134,18 +196,25 @@ def main():
         )
     )
 
+
+    # Prediction button
     if st.button("🔍 Predict Email"):
 
         if input_mail.strip() == "":
-            st.warning("⚠️ Please enter an email.")
+
+            st.warning(
+                "⚠️ Please enter an email."
+            )
 
         else:
+
             spam_mail_pred(input_mail)
 
 
 # --------------------------------------------------
-# Run
+# Run application
 # --------------------------------------------------
 
 if __name__ == "__main__":
     main()
+```
