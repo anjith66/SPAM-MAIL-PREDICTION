@@ -23,21 +23,21 @@ st.set_page_config(
 
 
 
-BACKGROUND_PATH = r"D:\projects ml\SPAM MAIL PREDICTION\SPAM MAIL BACKGROUND.png"
+BACKGROUND_PATH = "SPAM MAIL BACKGROUND.png"
 
 
 # --------------------------------------------------
 # Load model
 # --------------------------------------------------
 
-load_model=pickle.load(open("D:/projects ml/SPAM MAIL PREDICTION/spam_mail_prediction.sav","rb"))
+load_model=pickle.load(open("spam_mail_prediction.sav","rb"))
 
 
 # --------------------------------------------------
 # Load TF-IDF vectorizer
 # --------------------------------------------------
 
-feature_extraction=pickle.load(open("D:/projects ml/SPAM MAIL PREDICTION/features_extraction.sav","rb"))
+feature_extraction=pickle.load(open("features_extraction.sav","rb"))
 
 
 # --------------------------------------------------
