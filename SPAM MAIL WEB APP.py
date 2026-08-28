@@ -1,4 +1,3 @@
-```python
 import pickle
 import streamlit as st
 import base64
@@ -217,4 +216,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
